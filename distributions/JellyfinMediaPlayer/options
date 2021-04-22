@@ -215,9 +215,6 @@ DISTRO_DEPS_PKG="python-pip"
 
   QT_EXTRA_FLAGS=--force-debug-info
 
-# use our own fonts
-  CUSTOM_FONTS="jellyfinmediaplayer-fonts-ttf"
-
 # Define our build variables
 # PMP repo
 export PLEX_PMP_REPO=${PMP_REPO:-jellyfin-media-player}
