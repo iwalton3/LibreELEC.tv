@@ -7,4 +7,4 @@ ExecStartPre=/bin/sh -c "if [ ! -d /storage/.cache/libreelec ]; then mkdir /stor
 ExecStart=/bin/sh -c "echo Setting up PMP required configs "
 
 [Install]
-WantedBy=plex.target
+WantedBy=jellyfin.target

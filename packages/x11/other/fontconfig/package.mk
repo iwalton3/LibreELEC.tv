@@ -38,7 +38,7 @@ PKG_CONFIGURE_OPTS_TARGET="--with-arch=$TARGET_ARCH \
 ### PLEX
 PKG_DEPENDS_HOST="toolchain freetype:host libxml2:host zlib:host"
 PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_TARGET} \
-			 --with-cache-dir=/usr/share/plexmediaplayer/fc-cache \
+			 --with-cache-dir=/usr/share/jellyfinmediaplayer/fc-cache \
 			 --enable-static \
 			 --disable-shared"
 

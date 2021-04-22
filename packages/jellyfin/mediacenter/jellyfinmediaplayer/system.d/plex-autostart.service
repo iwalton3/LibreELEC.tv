@@ -1,6 +1,6 @@
 [Unit]
 Description=Plex Media Player user autostart script
-Before=plex.service
+Before=jellyfin.service
 After=graphical.target
 ConditionPathExists=/storage/.config/autostart.sh
 
@@ -11,4 +11,4 @@ ExecStart=-/bin/sh -c ". /etc/profile; exec /bin/sh /storage/.config/autostart.s
 RemainAfterExit=yes
 
 [Install]
-WantedBy=plex.service
+WantedBy=jellyfin.service

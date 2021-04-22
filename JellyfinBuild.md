@@ -20,6 +20,6 @@ That should enable the host to build PMP Embedded and LibreELEC.
 
 To build a project navigate to the root of the source tree and run one of the two commands:
 
-RPi2: `DISTRO=PlexMediaPlayer PROJECT=RPi2 ARCH=arm PMP_REPO=plex-media-player PMP_BRANCH=master make image`
+RPi2: `DISTRO=JellyfinMediaPlayer PROJECT=RPi2 ARCH=arm PMP_REPO=jellyfin-media-player PMP_BRANCH=master make image`
 
-Generic: `DISTRO=PlexMediaPlayer PROJECT=Generic ARCH=x86_64 PMP_REPO=plex-media-player PMP_BRANCH=master make image`
+Generic: `DISTRO=JellyfinMediaPlayer PROJECT=Generic ARCH=x86_64 PMP_REPO=jellyfin-media-player PMP_BRANCH=master make image`
