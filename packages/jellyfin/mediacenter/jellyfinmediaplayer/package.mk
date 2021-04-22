@@ -24,12 +24,12 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="https://nightlies.plex.tv"
 PKG_URL="$PKG_SITE/directdl/plex-oe-sources/$PKG_NAME-dummy.tar.gz"
-PKG_DEPENDS_TARGET="toolchain systemd fontconfig qt5 libcec SDL2 libXdmcp breakpad breakpad:host samba libconnman-qt ${MEDIACENTER,,}-fonts-ttf fontconfig:host mpv"
+PKG_DEPENDS_TARGET="toolchain systemd fontconfig qt5 libcec SDL2 libXdmcp samba libconnman-qt ${MEDIACENTER,,}-fonts-ttf fontconfig:host mpv"
 PKG_DEPENDS_HOST="toolchain"
 PKG_PRIORITY="optional"
 PKG_SECTION="mediacenter"
-PKG_SHORTDESC="Plex Media Player"
-PKG_LONGDESC="Plex is the king or PC clients for Plex :P"
+PKG_SHORTDESC="Jellyfin Media Player"
+PKG_LONGDESC="Jellyfin Media Player OE Build"
 PKG_TOOLCHAIN="cmake"
 
 # Add eventual X11 additionnal deps
@@ -38,14 +38,8 @@ if [ "$DISPLAYSERVER" = "x11" ]; then
 fi
 
 # Cod Options
-if [ "${CODECS}" = "yes" ]; then
-  COD_OPTIONS_ENABLE="on"
-  COD_OPTIONS_DEPFOLDER="plexmediaplayer-openelec-codecs"
-  COD_DISABLE_BUNDLE_DEPS="off"
-else
-  COD_OPTIONS_ENABLE="off"
-  COD_DISABLE_BUNDLE_DEPS="on"
-fi
+COD_OPTIONS_ENABLE="off"
+COD_DISABLE_BUNDLE_DEPS="on"
 
 # define build type 
 if [ "$PLEX_DEBUG" = yes ]; then
@@ -85,7 +79,7 @@ unpack() {
     git pull ; git reset --hard
   else
     rm -rf $BUILD/${PKG_NAME}-${PKG_VERSION}
-    git clone --depth 20 -b ${PLEX_PMP_BRANCH} git@github.com:plexinc/${PLEX_PMP_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
+    git clone --depth 20 -b ${PLEX_PMP_BRANCH} git@github.com:jellyfin/${PLEX_PMP_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
   fi
 
   cd ${ROOT}	
@@ -112,7 +106,6 @@ makeinstall_target() {
   # deploy files
   mkdir -p $INSTALL/usr/bin
   cp  $PKG_BUILD/.$TARGET_NAME/src/${MEDIACENTER,,} ${INSTALL}/usr/bin/
-  cp  $PKG_BUILD/.$TARGET_NAME/src/pmphelper ${INSTALL}/usr/bin/
 
   mkdir -p $INSTALL/usr/share/${MEDIACENTER,,} $INSTALL/usr/share/${MEDIACENTER,,}/scripts
   cp -R $PKG_BUILD/resources/* ${INSTALL}/usr/share/${MEDIACENTER,,}
@@ -123,22 +116,18 @@ makeinstall_target() {
 }
 
 post_install() {
-  # deploy our own cert file
-  mkdir -p $INSTALL/etc/ssl/certs
-  cp $PKG_DIR/cert/plex-cert.pem $INSTALL/etc/ssl/certs/cert.pem
-
   # link default.target to plex.target
-  ln -sf plex.target $INSTALL/usr/lib/systemd/system/default.target
+  ln -sf jellyfin.target $INSTALL/usr/lib/systemd/system/default.target
 
   # enable default services
   enable_service plex-autostart.service
-  enable_service plex.service
-  enable_service plex.target
+  enable_service jellyfin.service
+  enable_service jellyfin.target
   enable_service plex-waitonnetwork.service
   enable_service plex-prenetwork.service
 
   #copy out network wait file 
-  cp $PKG_DIR/system.d/network_wait $INSTALL/usr/share/plexmediaplayer/
+  cp $PKG_DIR/system.d/network_wait $INSTALL/usr/share/jellyfinmediaplayer/
 
   #echo "Generating pre-fontcache"
   export FONTCONFIG_FILE=$BUILD/image/system/etc/fonts/fonts.conf

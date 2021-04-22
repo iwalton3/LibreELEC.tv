@@ -5,26 +5,26 @@
   GOLD_SUPPORT="yes"
 
 # Name of the Distro to build (full name, without special characters)
-  DISTRONAME="PlexMediaPlayer"
+  DISTRONAME="JellyfinMediaPlayer"
 
 # short project description
-  DESCRIPTION="Plex - Enjoy your videos, photos and music anytime, anywhere"
+  DESCRIPTION="Jellyfin - Client for Jellyfin Media Server"
 
 # Welcome Message for e.g. SSH Server (up to 5 Lines)
   GREETING0="##############################################"
-  GREETING1="# ......... PlexMediaPlayer - Plex ......... #"
-  GREETING2="# ........... visit http://plex.tv ......... #"
+  GREETING1="# ..... JellyfinMediaPlayer - Jellyfin ..... #"
+  GREETING2="# ........ visit http://jellyfin.org ....... #"
   GREETING3="##############################################"
   GREETING4=""
 
 # Root password to integrate in the target system
-  ROOT_PASSWORD="plex"
+  ROOT_PASSWORD="jellyfin"
 
 # Install glibc locales to the build (yes / no)
   GLIBC_LOCALES="yes"
 
 # Mediacenter to use (kodi / no)
-  MEDIACENTER="plexmediaplayer"
+  MEDIACENTER="jellyfinmediaplayer"
 
 # Skins to install (Estuary)
 # Space separated list is supported,
@@ -200,7 +200,7 @@
 # Default supported get handlers (archive, git, file etc.)
   GET_HANDLER_SUPPORT="archive"
 
-# Plex extra dependencies
+# Jellyfin extra dependencies
 DISTRO_DEPS="pip"
 DISTRO_DEPS_PKG="python-pip"
 
@@ -216,11 +216,11 @@ DISTRO_DEPS_PKG="python-pip"
   QT_EXTRA_FLAGS=--force-debug-info
 
 # use our own fonts
-  CUSTOM_FONTS="plexmediaplayer-fonts-ttf"
+  CUSTOM_FONTS="jellyfinmediaplayer-fonts-ttf"
 
 # Define our build variables
 # PMP repo
-export PLEX_PMP_REPO=${PMP_REPO:-plex-media-player}
+export PLEX_PMP_REPO=${PMP_REPO:-jellyfin-media-player}
 
 # PMP Branch
 PLEX_PMP_BRANCH=${PMP_BRANCH:-dist-ninja}
@@ -228,38 +228,16 @@ export PLEX_PMP_BRANCH="`echo ${PLEX_PMP_BRANCH/origin\//}`"
 
 # PMP sha
 if [ -z $PLEX_PMP_GITSHA ]; then
-  export PLEX_PMP_GITSHA="`git ls-remote --heads git@github.com:plexinc/${PLEX_PMP_REPO}.git ${PLEX_PMP_BRANCH}|awk '{print substr($0,0,8)}'`"
+  export PLEX_PMP_GITSHA="`git ls-remote --heads git@github.com:jellyfin/${PLEX_PMP_REPO}.git ${PLEX_PMP_BRANCH}|awk '{print substr($0,0,8)}'`"
 fi
 
 # PMP version
 if [ -z $PLEX_PMP_VERSION ]; then
-  if [ "`curl -sL -w "%{http_code}\\n" --user "plex-konvergo:$GIT_TOKEN" https://raw.githubusercontent.com/plexinc/$PLEX_PMP_REPO/$PLEX_PMP_GITSHA/CMakeModules/VersionConfiguration.cmake -o /dev/null`" = "200" ]; then
-    export PLEX_PMP_VERSION="`curl -s -u plex-konvergo:$GIT_TOKEN https://raw.githubusercontent.com/plexinc/$PLEX_PMP_REPO/$PLEX_PMP_GITSHA/CMakeModules/VersionConfiguration.cmake|awk '/MAJOR |MINOR |NANO / {gsub(/\)/,""); printf $2"."}  END {print ""}'|sed 's/.$//g'`"
+  if [ "`curl -sL -w "%{http_code}\\n" https://raw.githubusercontent.com/jellyfin/$PLEX_PMP_REPO/$PLEX_PMP_GITSHA/CMakeModules/VersionConfiguration.cmake -o /dev/null`" = "200" ]; then
+    export PLEX_PMP_VERSION="`curl -s https://raw.githubusercontent.com/jellyfin/$PLEX_PMP_REPO/$PLEX_PMP_GITSHA/CMakeModules/VersionConfiguration.cmake|awk '/MAJOR |MINOR |NANO / {gsub(/\)/,""); printf $2"."}  END {print ""}'|sed 's/.$//g'`"
   else
     export PLEX_PMP_VERSION="dev"
   fi
-fi
-
-# Codes build
-if [ "$CODECS" = "yes" ]; then
-  case $ARCH in
-    arm)
-     export PLEX_CODEC_ARCH="armv7"
-    ;;
-
-    *)
-      export PLEX_CODEC_ARCH=$ARCH
-    ;;
-  esac
-
-  if [ -z $PLEX_CODEC_VERSION ]; then
-    export PLEX_CODEC_VERSION="`curl -s -u plex-konvergo:$GIT_TOKEN https://raw.githubusercontent.com/plexinc/${PLEX_PMP_REPO}/$PLEX_PMP_GITSHA/CMakeModules/DependencyConfiguration.cmake|awk '/OPENELEC/ {getline;getline;print $0}'|sed -n 's/.*NUMBER *\([^ ]*\))/\1/p'`"
-  fi
-
-  if [ -z $PLEX_CODEC_HASH ]; then
-    export PLEX_CODEC_HASH="`curl -s https://nightlies.plex.tv/directdl/${DEPENDENCY_TOKEN}/plexmediaplayer-openelec-codecs/$PLEX_CODEC_VERSION/hash.txt`"
-  fi
-
 fi
 
 # build our custom vars

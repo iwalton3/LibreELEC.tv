@@ -1,7 +1,7 @@
 [Unit]
 Description=Wait on network
 After=connman.service
-Before=plex-autostart.service plex.service
+Before=plex-autostart.service jellyfin.service
 ConditionPathExists=/storage/.cache/libreelec/network_wait
 
 [Service]
@@ -13,4 +13,4 @@ StandardOutput=tty
 RemainAfterExit=yes
 
 [Install]
-WantedBy=plex.service
+WantedBy=jellyfin.service
