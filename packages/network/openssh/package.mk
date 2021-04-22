@@ -55,5 +55,10 @@ post_makeinstall_target() {
 }
 
 post_install() {
+  ### PLEX
+  mkdir -p $INSTALL/usr/share/services
+  cp $PKG_DIR/sshd.conf $INSTALL/usr/share/services/
+  ### END PLEX 
+
   enable_service sshd.service
 }
