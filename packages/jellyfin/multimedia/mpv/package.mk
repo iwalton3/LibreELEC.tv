@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="mpv"
-PKG_VERSION="old-master"
+PKG_VERSION="master"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -30,7 +30,7 @@ PKG_SHORTDESC="MPV Movie Player
 PKG_LONGDESC="
 PKG_TOOLCHAIN="manual"
 
-PKG_CONFIGURE_OPTS_TARGET="--enable-libmpv-shared --disable-libsmbclient --disable-apple-remote --prefix=${SYSROOT_PREFIX}/usr"
+PKG_CONFIGURE_OPTS_TARGET="--enable-libmpv-shared --prefix=${SYSROOT_PREFIX}/usr"
 
 # ensure we get proper debug info on mpv
 CFLAGS="-g3 -ggdb"
@@ -55,7 +55,7 @@ fi
 unpack() {
   mkdir $BUILD/${PKG_NAME}-${PKG_VERSION}
   
-  git clone -b $PKG_VERSION https://github.com/plexinc/mpv.git $BUILD/${PKG_NAME}-${PKG_VERSION}/.
+  git clone -b $PKG_VERSION https://github.com/mpv-player/mpv.git $BUILD/${PKG_NAME}-${PKG_VERSION}/.
 
   cd  $BUILD/${PKG_NAME}-${PKG_VERSION}/
   git remote add upstream https://github.com/mpv-player/mpv.git
