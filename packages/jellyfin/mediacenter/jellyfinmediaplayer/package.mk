@@ -82,7 +82,13 @@ unpack() {
     git clone --depth 20 -b ${PLEX_PMP_BRANCH} https://github.com/jellyfin/${PLEX_PMP_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
   fi
 
-  cd ${ROOT}	
+  wget https://github.com/iwalton3/jellyfin-web-jmp/releases/download/jwc-10.7.2-2/dist.zip -O dist.zip
+  unzip dist.zip
+  rm dist.zip
+  mkdir -p $BUILD/${PKG_NAME}-${PKG_VERSION}/build/
+  mv dist $BUILD/${PKG_NAME}-${PKG_VERSION}/build/
+
+  cd ${ROOT}
 }
 
 pre_install()
