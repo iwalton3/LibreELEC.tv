@@ -143,15 +143,15 @@ PROMPT 1
 
 LABEL installer
   KERNEL /$KERNEL_NAME
-  APPEND boot=UUID=$UUID_SYSTEM installer quiet tty vga=current
+  APPEND boot=UUID=$UUID_SYSTEM installer tty vga=current
 
 LABEL live
   KERNEL /$KERNEL_NAME
-  APPEND boot=UUID=$UUID_SYSTEM live quiet tty vga=current
+  APPEND boot=UUID=$UUID_SYSTEM live tty vga=current
 
 LABEL run
   KERNEL /$KERNEL_NAME
-  APPEND boot=UUID=$UUID_SYSTEM disk=UUID=$UUID_STORAGE portable quiet
+  APPEND boot=UUID=$UUID_SYSTEM disk=UUID=$UUID_STORAGE portable
 EOF
 
     cat << EOF > "$LE_TMP"/grub.cfg
@@ -159,15 +159,15 @@ set timeout="25"
 set default="Installer"
 menuentry "Installer" {
 	search --set -f /KERNEL
-	linux /KERNEL boot=UUID=$UUID_SYSTEM installer quiet tty vga=current
+	linux /KERNEL boot=UUID=$UUID_SYSTEM installer tty vga=current
 }
 menuentry "Live" {
 	search --set -f /KERNEL
-	linux /KERNEL boot=UUID=$UUID_SYSTEM grub_live quiet tty vga=current
+	linux /KERNEL boot=UUID=$UUID_SYSTEM grub_live tty vga=current
 }
 menuentry "Run" {
 	search --set -f /KERNEL
-	linux /KERNEL boot=UUID=$UUID_SYSTEM disk=UUID=$UUID_STORAGE grub_portable quiet
+	linux /KERNEL boot=UUID=$UUID_SYSTEM disk=UUID=$UUID_STORAGE grub_portable
 }
 EOF
 
