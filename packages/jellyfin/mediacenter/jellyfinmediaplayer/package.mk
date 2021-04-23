@@ -128,11 +128,11 @@ post_install() {
   ln -sf jellyfin.target $INSTALL/usr/lib/systemd/system/default.target
 
   # enable default services
-  enable_service plex-autostart.service
+  enable_service jellyfin-autostart.service
   enable_service jellyfin.service
   enable_service jellyfin.target
-  enable_service plex-waitonnetwork.service
-  enable_service plex-prenetwork.service
+  enable_service jellyfin-waitonnetwork.service
+  enable_service jellyfin-prenetwork.service
 
   #copy out network wait file 
   cp $PKG_DIR/system.d/network_wait $INSTALL/usr/share/jellyfinmediaplayer/

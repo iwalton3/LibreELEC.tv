@@ -1,5 +1,5 @@
 [Unit]
-Description=Plex Media Player user autostart script
+Description=Jellyfin Media Player user autostart script
 Before=jellyfin.service
 After=graphical.target
 ConditionPathExists=/storage/.config/autostart.sh
