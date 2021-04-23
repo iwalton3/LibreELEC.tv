@@ -116,7 +116,9 @@ makeinstall_target() {
   mkdir -p $INSTALL/usr/share/${MEDIACENTER,,} $INSTALL/usr/share/${MEDIACENTER,,}/scripts
   cp -R $PKG_BUILD/resources/* ${INSTALL}/usr/share/${MEDIACENTER,,}
   cp $PKG_DIR/scripts/plex_update.sh ${INSTALL}/usr/share/${MEDIACENTER,,}/scripts/
-  cp -R $PKG_BUILD/.$TARGET_NAME/src/web-client* ${INSTALL}/usr/share/${MEDIACENTER,,}/
+  mkdir -p ${INSTALL}/usr/share/${MEDIACENTER,,}/web-client/
+  cp -R $PKG_BUILD/build/dist ${INSTALL}/usr/share/${MEDIACENTER,,}/web-client/desktop
+  cp -R $PKG_BUILD/native ${INSTALL}/usr/share/${MEDIACENTER,,}/web-client/extension
 
  debug_strip $INSTALL/usr/bin
 }
