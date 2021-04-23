@@ -1,0 +1,37 @@
+diff --git a/native/nativeshell.js b/native/nativeshell.js
+index 030f549..b446968 100644
+--- a/native/nativeshell.js
++++ b/native/nativeshell.js
+@@ -71,15 +71,29 @@ function getDeviceProfile() {
+                 'Type': 'Video',
+                 'Protocol': 'hls',
+                 'AudioCodec': 'aac,mp3,ac3,opus,flac,vorbis',
+-                'VideoCodec': 'h264,h265,hevc,mpeg4,mpeg2video',
++                'VideoCodec': 'h264,mpeg4',
+                 'MaxAudioChannels': '6'
+             },
+             {'Container': 'jpeg', 'Type': 'Photo'}
+         ],
+-        'DirectPlayProfiles': [{'Type': 'Video'}, {'Type': 'Audio'}, {'Type': 'Photo'}],
++        'DirectPlayProfiles': [
++            {
++                'Type': 'Video',
++                'VideoCodec': 'h264,mpeg4'
++            },
++            {'Type': 'Audio'},
++            {'Type': 'Photo'}],
+         'ResponseProfiles': [],
+         'ContainerProfiles': [],
+-        'CodecProfiles': [],
++        'CodecProfiles': [{
++            "Type": "Video",
++            "codec": "h264",
++            "Conditions": [{
++                "Condition": "LessThanEqual",
++                "Property": "VideoBitDepth",
++                "Value": "8",
++            }],
++        }],
+         'SubtitleProfiles': [
+             {'Format': 'srt', 'Method': 'External'},
+             {'Format': 'srt', 'Method': 'Embed'},

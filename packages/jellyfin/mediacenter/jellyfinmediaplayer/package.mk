@@ -88,6 +88,12 @@ unpack() {
   mkdir -p $BUILD/${PKG_NAME}-${PKG_VERSION}/build/
   mv dist $BUILD/${PKG_NAME}-${PKG_VERSION}/build/
 
+  if [ "$PMP_BUILD_TARGET" == "RPI" ]
+  then
+    cd $BUILD/${PKG_NAME}-${PKG_VERSION}
+    git apply $PKG_DIR/patch_rpi_profile.patch
+  fi
+
   cd ${ROOT}
 }
 
