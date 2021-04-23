@@ -30,7 +30,7 @@ docker run --name ubuntu_test --mount type=bind,source="$(pwd)",target=/app -it 
 
 dpkg --add-architecture i386
 apt-get clean all ; apt-get update
-apt-get install gcc-multilib libexpat1-dev:i386 libfreetype6-dev:i386 libexpat1-dev libfreetype6-dev fontconfig:i386 build-essential wget bc gawk gperf zip unzip lzop xsltproc openjdk-9-jre-headless libncurses5-dev texi2html libexpat1 patchutils xfonts-utils python python-pip libjson-perl libxml-parser-perl git
+apt-get install gcc-multilib libexpat1-dev:i386 libfreetype6-dev:i386 libexpat1-dev libfreetype6-dev fontconfig:i386 build-essential wget bc gawk gperf zip unzip lzop xsltproc openjdk-9-jre-headless libncurses5-dev texi2html libexpat1 patchutils xfonts-utils python python-pip libjson-perl libxml-parser-perl git curl
 
 uid=$(stat --format="%u" /app)
 echo "user:x:$uid:$uid:,,,:/home/user:/bin/bash" >> /etc/passwd
