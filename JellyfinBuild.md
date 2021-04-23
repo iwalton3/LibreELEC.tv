@@ -1,22 +1,6 @@
 # LibreELEC PMP Build setup
 
-In order to get LibreELEC with PMP building on Ubuntu 16.04 amd64 (Possibly other releases too) there are a few requirements that have to be made after a normal 16.04 amd64 install.
-
-Follow these steps to get the build env setup.
-
-As root run these commands:
-
-`dpkg --add-architecture i386`
-
-`apt-get clean all ; apt-get update`
-
-## Optional
-`apt-get install build-essential wget bc gawk gperf zip unzip lzop xsltproc openjdk-9-jre-headless libncurses5-dev texi2html libexpat1`
-
-## Required
-`apt-get install gcc-multilib libexpat1-dev:i386 libfreetype6-dev:i386 libexpat1-dev libfreetype6-dev fontconfig:i386`
-
-That should enable the host to build PMP Embedded and LibreELEC.
+In order to get LibreELEC with PMP building on Ubuntu 20.04 amd64 (Possibly other releases too) there are a few requirements that have to be made after a normal 20.04 amd64 install.
 
 To build a project navigate to the root of the source tree and run one of the two commands:
 
@@ -26,14 +10,16 @@ Generic: `DISTRO=JellyfinMediaPlayer PROJECT=Generic ARCH=x86_64 PMP_REPO=jellyf
 
 ## Docker Example Commands
 ```
-docker run --name ubuntu_test --mount type=bind,source="$(pwd)",target=/app -it ubuntu:16.04 bash
+docker run --name ubuntu_test --mount type=bind,source="$(pwd)",target=/app -it ubuntu:20.04 bash
 
 dpkg --add-architecture i386
-apt-get clean all ; apt-get update
-apt-get install gcc-multilib libexpat1-dev:i386 libfreetype6-dev:i386 libexpat1-dev libfreetype6-dev fontconfig:i386 build-essential wget bc gawk gperf zip unzip lzop xsltproc openjdk-9-jre-headless libncurses5-dev texi2html libexpat1 patchutils xfonts-utils python python-pip libjson-perl libxml-parser-perl git curl
+apt update
+apt install gcc-multilib libexpat1-dev:i386 libfreetype6-dev:i386 libexpat1-dev libfreetype6-dev fontconfig:i386 build-essential wget bc gawk gperf zip unzip lzop xsltproc openjdk-11-jre-headless libncurses5-dev texi2html libexpat1 patchutils xfonts-utils python python3-pip libjson-perl libxml-parser-perl git curl
 
 uid=$(stat --format="%u" /app)
-echo "user:x:$uid:$uid:,,,:/home/user:/bin/bash" >> /etc/passwd
+echo "user:x:$uid:100:,,,:/home/user:/bin/bash" >> /etc/passwd
+echo 'user:*:18718:0:99999:7:::' >> /etc/shadow
+
 su user
 
 DISTRO=JellyfinMediaPlayer PROJECT=Generic ARCH=x86_64 PMP_REPO=jellyfin-media-player PMP_BRANCH=master make image
