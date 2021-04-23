@@ -17,12 +17,12 @@
 ################################################################################
 
 PKG_NAME="uchardet"
-PKG_VERSION="0.0.6"
+PKG_VERSION="v0.0.7"
 PKG_REV="0"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://cgit.freedesktop.org/uchardet/"
-PKG_URL="http://cgit.freedesktop.org/uchardet/uchardet/snapshot/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_URL="https://gitlab.freedesktop.org/uchardet/uchardet/-/archive/v0.0.7/uchardet-$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SECTION="multimedia"
 PKG_SHORTDESC="uchardet is an encoding detector library."
