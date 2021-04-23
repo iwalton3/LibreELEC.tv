@@ -22,8 +22,8 @@ PKG_VERSION=$PLEX_PMP_BRANCH
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="https://nightlies.plex.tv"
-PKG_URL="$PKG_SITE/directdl/plex-oe-sources/$PKG_NAME-dummy.tar.gz"
+PKG_SITE="https://iwalton.com"
+PKG_URL="$PKG_SITE/ushare/packages/$PKG_NAME-dummy.tar.gz"
 PKG_DEPENDS_TARGET="toolchain systemd fontconfig qt5 libcec SDL2 libXdmcp samba libconnman-qt fontconfig:host mpv"
 PKG_DEPENDS_HOST="toolchain"
 PKG_PRIORITY="optional"
@@ -79,7 +79,7 @@ unpack() {
     git pull ; git reset --hard
   else
     rm -rf $BUILD/${PKG_NAME}-${PKG_VERSION}
-    git clone --depth 20 -b ${PLEX_PMP_BRANCH} git@github.com:jellyfin/${PLEX_PMP_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
+    git clone --depth 20 -b ${PLEX_PMP_BRANCH} https://github.com/jellyfin/${PLEX_PMP_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
   fi
 
   cd ${ROOT}	

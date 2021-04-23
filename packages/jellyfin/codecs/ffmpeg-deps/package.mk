@@ -21,8 +21,8 @@ PKG_VERSION="konvergo-codecs"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPLv2.1+"
-PKG_SITE="https://nightlies.plex.tv"
-PKG_URL="$PKG_SITE/directdl/plex-oe-sources/ffmpeg-dummy.tar.gz"
+PKG_SITE="https://iwalton.com"
+PKG_URL="$PKG_SITE/ushare/packages/ffmpeg-dummy.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_PRIORITY="optional"
 PKG_SECTION="service/multimedia"
@@ -54,7 +54,7 @@ esac
 
 unpack() {
 
-        git clone --depth 1 -b $DEPS_BRANCH git@github.com:${DEPS_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
+        git clone --depth 1 -b $DEPS_BRANCH https://github.com/${DEPS_REPO}.git $BUILD/${PKG_NAME}-${PKG_VERSION}
 
 }
 ### END PLEX

@@ -21,8 +21,8 @@ PKG_VERSION="old-master"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="https://nightlies.plex.tv"
-PKG_URL="$PKG_SITE/directdl/plex-oe-sources/$PKG_NAME-dummy.tar.gz"
+PKG_SITE="https://iwalton.com"
+PKG_URL="$PKG_SITE/ushare/packages/$PKG_NAME-dummy.tar.gz"
 PKG_DEPENDS_TARGET="toolchain libass qt5 libdrm alsa uchardet"
 PKG_PRIORITY="optional"
 PKG_SECTION="multimedia"
@@ -55,7 +55,7 @@ fi
 unpack() {
   mkdir $BUILD/${PKG_NAME}-${PKG_VERSION}
   
-  git clone -b $PKG_VERSION git@github.com:plexinc/mpv.git $BUILD/${PKG_NAME}-${PKG_VERSION}/.
+  git clone -b $PKG_VERSION https://github.com/plexinc/mpv.git $BUILD/${PKG_NAME}-${PKG_VERSION}/.
 
   cd  $BUILD/${PKG_NAME}-${PKG_VERSION}/
   git remote add upstream https://github.com/mpv-player/mpv.git
