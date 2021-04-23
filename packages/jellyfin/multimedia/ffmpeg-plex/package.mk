@@ -21,8 +21,8 @@ PKG_VERSION="master"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPLv2.1+"
-PKG_SITE="https://nightlies.plex.tv"
-PKG_URL="$PKG_SITE/directdl/plex-oe-sources/$PKG_NAME-dummy.tar.gz"
+PKG_SITE="https://iwalton.com"
+PKG_URL="$PKG_SITE/ushare/packages/$PKG_NAME-dummy.tar.gz"
 PKG_DEPENDS_TARGET="toolchain zlib bzip2 libvorbis openssl gnutls"
 
 PKG_PRIORITY="optional"
@@ -41,7 +41,7 @@ DEBUG=$PLEX_DEBUG
 unpack() {
   case $PROJECT in
     *)
-      git clone --depth 1 -b $PKG_VERSION git@github.com:FFmpeg/FFmpeg.git $BUILD/${PKG_NAME}-${PKG_VERSION}
+      git clone --depth 1 -b $PKG_VERSION https://github.com/FFmpeg/FFmpeg.git $BUILD/${PKG_NAME}-${PKG_VERSION}
     ;;
   esac
 }

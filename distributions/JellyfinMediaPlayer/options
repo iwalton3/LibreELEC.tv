@@ -225,7 +225,7 @@ export PLEX_PMP_BRANCH="`echo ${PLEX_PMP_BRANCH/origin\//}`"
 
 # PMP sha
 if [ -z $PLEX_PMP_GITSHA ]; then
-  export PLEX_PMP_GITSHA="`git ls-remote --heads git@github.com:jellyfin/${PLEX_PMP_REPO}.git ${PLEX_PMP_BRANCH}|awk '{print substr($0,0,8)}'`"
+  export PLEX_PMP_GITSHA="`git ls-remote --heads https://github.com/jellyfin/${PLEX_PMP_REPO}.git ${PLEX_PMP_BRANCH}|awk '{print substr($0,0,8)}'`"
 fi
 
 # PMP version
