@@ -1,7 +1,7 @@
 [Unit]
 Description=Wait on network
 After=connman.service
-Before=plex-autostart.service jellyfin.service
+Before=jellyfin-autostart.service jellyfin.service
 ConditionPathExists=/storage/.cache/libreelec/network_wait
 
 [Service]
